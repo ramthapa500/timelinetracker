@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!--<link rel="stylesheet" href="styles.css" /> -->
+    <style>
+        :root {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', 'Raleway', sans-serif;
+            font-size: 20px;
+            background-color: rgb(17, 212, 147);
+            scroll-behavior: smooth;
+        }
+
+        .mainContainer {
+            width: 80%;
+            margin: auto;
+            margin-bottom: 150px;
+        }
+
+        .headerImage {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            position: absolute;
+            top: 1rem;
+            /* right: 0;
+    left: 0;
+    margin: 0 auto; */
+            left: 50%;
+            text-align: center;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 3rem;
+        }
+
+        .headerImage img {
+            height: inherit;
+            width: inherit;
+            object-fit: cover;
+        }
+
+        .navbar {
+            text-align: justify;
+            display: flex;
+            margin-bottom: 1rem;
+            justify-content: space-between;
+            border-top: 1px solid rgb(19, 155, 19);
+            border-bottom: 1px solid rgb(19, 155, 19);
+        }
+
+        .navbar ul {
+            display: inline-block;
+            padding: 0;
+            list-style: none;
+        }
+
+        .navbar ul li {
+            display: inline;
+            text-align: left;
+        }
+
+        .home {
+            font-family: Arial, Helvetica, sans-serif;
+            text-decoration: none;
+            color: rgb(13, 82, 4);
+            font-weight: 800px;
+            /* border: 1px solid; */
+            background-color: rgb(18, 201, 131);
+            padding: 8px;
+            border-radius: 0.5em;
+        }
+
+        .home:hover {
+            background-color: rgb(3, 95, 42);
+            color: white;
+        }
+
+        .navLink {
+            text-decoration: none;
+            color: rgb(13, 82, 4);
+            font-weight: 900px;
+            padding: 5px;
+        }
+
+        .navLink:hover {
+            background-color: rgb(3, 95, 42);
+            color: white;
+            border-radius: 0.5em;
+        }
+
+        .navbarToggler {
+            display: none;
+            text-align: right;
+            vertical-align: baseline;
+            height: 40px;
+            margin-top: 1rem;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 48;
+        }
+
+        h2 {
+            margin: 4px auto;
+            padding-left: 10px;
+            font-size: 1.2rem;
+            background-color: rgb(17, 158, 17);
+        }
+
+        h3 {
+            margin-bottom: 5px;
+            font-size: 1em;
+            font-weight: 400;
+        }
+
+        p {
+            margin-bottom: 5px;
+        }
+
+        h4 {
+            margin-bottom: 5px;
+        }
+
+        #dateSelection {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 10px;
+            margin-left: 10px;
+        }
+
+        #dateSelection label {
+            display: block;
+            margin: 5px;
+        }
+
+        #dateSelection input {
+            display: block;
+            box-sizing: border-box;
+            width: 90%;
+            margin: 5px;
+            padding-left: 20px;
+        }
+
+        #allowanceInfoSelection {
+            margin: 0 20px;
+        }
+
+        #allowanceInfoSelection label,
+        #allowanceInfoSelection select {
+            display: inline-block;
+            margin: 10px auto;
+        }
+
+        #allowanceInfoSelection select {
+            padding: 5px;
+            box-sizing: border-box;
+            border-radius: 0.4em;
+            width: 35%;
+            margin-left: 20px;
+        }
+
+        #dailyLsaRate {
+            position: relative;
+            left: 9em;
+            top: -2em;
+            margin-bottom: -2em;
+        }
+
+        #result {
+            margin-bottom: 50px;
+        }
+
+        .resultSection {
+            display: grid;
+            margin-top: 5px;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-flow: column;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .resultSubSect {
+            display: block;
+            text-align: center;
+        }
+
+        .resultSubSect>* {
+            margin: 5px auto;
+        }
+
+        .resultBox {
+            height: 20px;
+            width: 120px;
+            padding: 0.4em 0.2em 0.6em 0.2em;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid rgb(7, 90, 7);
+            background-color: rgb(11, 90, 15);
+            color: white;
+            box-shadow: inset 5px 2px rgb(4, 48, 4);
+        }
+
+        .allowType {
+            position: relative;
+            left: 10em;
+            top: -2em;
+            margin-bottom: -2.5em;
+        }
+
+        .calcTitle {
+            margin: 4px 5px;
+            padding: 5px 0 5px 10px;
+            background-color: rgb(23, 94, 38);
+            color: white;
+        }
+
+        .calc {
+            /* display: flex; */
+            border: 1px solid;
+            height: 400px;
+            width: 400px;
+            background-color: azure;
+            margin: 15px auto;
+            border-radius: 0.25rem;
+        }
+
+        .method {
+            display: block;
+            width: 95%;
+            height: 30px;
+            margin: 0 auto;
+            text-align: right;
+            color: rgb(150, 140, 140);
+        }
+
+        .calcResult {
+            box-sizing: border-box;
+            padding: 0 7px;
+            font-family: 'Orbitron', sans-serif;
+            display: block;
+            overflow: hidden;
+            border: 1px solid;
+            width: 95%;
+            height: 40px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 auto;
+            text-align: right;
+            border-radius: 0.25em;
+            box-shadow: inset 5px 2px rgb(115, 139, 207);
+            color: rgb(55, 13, 153);
+            background: linear-gradient(rgb(105, 186, 206) 10%, rgb(89, 197, 224), rgb(55, 218, 218)70%)
+        }
+
+        .keys {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            padding: 10px;
+            margin-left: 10px;
+        }
+
+        .key {
+            display: flex;
+            border: 1px solid;
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            text-align: center;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            border-radius: 0.25rem;
+            box-shadow: 5px 5px 5px 1px rgba(0, 0, 255, .2);
+        }
+
+        #key18 {
+            background-color: rgb(196, 86, 86);
+        }
+
+        #key20 {
+            position: relative;
+            margin-top: -2.9em;
+            height: 5.7em;
+        }
+
+        #key15 {
+            visibility: hidden;
+        }
+
+        .resultLiveRemaining h3 {
+            display: block;
+            margin: 5px auto;
+            text-align: center;
+        }
+
+        .key:hover,
+        #key18:hover {
+            background-color: rgb(60, 175, 37);
+            cursor: pointer;
+        }
+
+        #boxForFullRemaining {
+            border: 2px solid;
+            background-color: rgb(0, 66, 22);
+            height: 1.8em;
+            padding: 0.2em;
+            width: 90%;
+            margin: 10px auto 20px auto;
+        }
+
+        #fullRemaining {
+            border: 2px solid;
+            height: 1.5em;
+            border-radius: 0.25em;
+            padding: 0.05em 0.1em 0 0.1em;
+            background-color: rgb(84, 196, 40);
+        }
+
+        #liveRemaining {
+            display: block;
+            background: linear-gradient(rgb(26, 168, 33)20%, rgb(17, 206, 17)10%, rgb(12, 117, 19)70%);
+            width: 0%;
+            height: 85%;
+            border-radius: 0.3em 0 0 0.3em;
+            box-shadow: 0px 5px 5px 1px rgba(223, 15, 50, 0.514);
+            text-align: center;
+            white-space: nowrap;
+            font-family: 'PT Sans', sans-serif;
+            font-weight: 700;
+            border: 1px solid rgb(22, 100, 26);
+        }
+
+        #result>h3,
+        .resultLiveRemaining>h3 {
+            display: block;
+            margin: auto;
+            margin-top: 10px;
+            width: 14em;
+            text-align: center;
+            font-weight: 700;
+            border: 1px solid;
+            border-radius: 0.5em;
+            background-color: rgb(56, 168, 99);
+        }
+
+        .liveResult {
+            width: 90%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            margin: 10px auto;
+            border: 4px double rgba(17, 99, 64, 0.808);
+            border-radius: 0.25em;
+            background-color: rgb(24, 175, 92);
+        }
+
+        .liveResult>.resultSubSect>h3 {
+            display: block;
+            width: 4em;
+            text-align: center;
+        }
+
+        .liveResult>.resultSubSect>.resultBox {
+            width: 60px;
+            background-color: bisque;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            color: black;
+        }
+
+        footer {
+            /* display: block; */
+            position: fixed;
+            margin: 0 2px 0 -5px;
+            box-sizing: border-box;
+            bottom: 0;
+            height: 80px;
+            width: 100%;
+            padding: 10px 15px;
+            background-color: rgb(44, 37, 37);
+            color: white;
+            text-align: right;
+            font-size: 0.7em;
+        }
+
+        footer>p {
+            margin: 2px auto;
+        }
+
+        footer>p:first-of-type {
+            margin-top: 10px;
+        }
+
+        footer>img {
+            position: absolute;
+            left: 30px;
+            top: 20%;
+            width: 50px;
+            height: 50px;
+            border-radius: 2em;
+        }
+
+        #clearInt {
+            height: 20px;
+            width: 20px;
+            border: 1px solid;
+        }
+
+        #reset {
+            display: block;
+            margin: 20px auto -10px auto;
+        }
+
+        @media (max-width: 905px) {
+            .mainContainer {
+                width: 90%;
+            }
+
+            h1 {
+                top: 2rem;
+                font-size: 2rem;
+            }
+
+            .navbarToggler {
+                display: inline;
+            }
+
+            .home,
+            .navLink {
+                display: block;
+                width: 100%;
+            }
+
+            ul {
+                width: 90%;
+            }
+
+            .navLink {
+                display: block;
+                background-color: bisque;
+            }
+
+            h2,
+            h3 {
+                font-size: 0.8em;
+            }
+
+            .resultBox {
+                height: 16px;
+                width: 90px;
+                font-size: 0.8rem;
+            }
+
+            #dateSelection {
+                font-size: 0.8em;
+            }
+
+            #allowanceInfoSelection {
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 690px) {
+            #dateSelection {
+                grid-template-columns: 1fr;
+            }
+
+            #dateSelection input {
+                width: 60%;
+            }
+
+            #allowanceInfoSelection select {
+                display: block;
+                width: 90%;
+                margin-left: 0;
+            }
+
+            .calc {
+                height: 340px;
+                width: 320px;
+            }
+
+            .method {
+                height: 25px;
+            }
+
+            .calcResult {
+                padding: 0 4px;
+                width: 95%;
+                height: 35px;
+                font-size: 1rem;
+                font-weight: 500;
+            }
+
+            .keys {
+                padding: 3px;
+                margin-left: 7px;
+            }
+
+            .key {
+                display: flex;
+                border: 1px solid;
+                width: 45px;
+                height: 45px;
+                margin: 2.5px;
+            }
+
+            #key20 {
+                position: relative;
+                margin-top: -2.5em;
+                height: 4.9em;
+            }
+
+            .resultLiveRemaining {
+                font-size: 0.7em;
+            }
+
+            .liveResult>.resultSubSect>h3 {
+                width: 75%;
+            }
+
+            footer {
+                font-size: 0.6em;
+            }
+        }
+    </style>
+
+    <title>Individual Deployment Tool</title>
+</head>
+
+<body>
+    <div class="mainContainer">
+        <header class="headerImage">
+            <img src="https://images.unsplash.com/photo-1501139083538-0139583c060f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                onerror="this.src='header_image.jpg';" alt="Sand Timer Image from images.unsplash.com" />
+            <h1>Incentive Tool</h1>
+        </header>
+        <nav class="navbar" id="navbar">
+            <ul>
+                <li><a href="index.html" class="home">Home</a></li>
+                <span class="navLinkGroup">
+                    <li><a href="#dateInfo" class="navLink">Deployment Information</a></li>
+                    <li><a href="#allowanceInfo" class="navLink">Allowance Information</a></li>
+                    <li><a href="#calculator" class="navLink">Calculator</a></li>
+                    <li><a href="#result" class="navLink">Result</a></li>
+                </span>
+            </ul>
+            <button class="navbarToggler" id="navbarToggler">
+                <span class="material-symbols-outlined">Menu</span>
+            </button>
+        </nav>
+        <h2 id="dateInfo">Deployment Information</h2>
+        <div id="dateSelection">
+            <label for="start">Deployment date:</label>
+            <input type="date" id="start" name="tour-start" value="" min="1999-01-01" max="2050-12-31" required />
+            <label for="startTime">Deployment Time</label>
+            <input type="time" id="startTime" name="startTime" value="00:00" required />
+            <label for="end">Return date:</label>
+            <input type="date" id="end" name="tour-end" value="" min="1999-01-01" max="2050-12-31" required />
+            <label for="endTime">Return Time</label>
+            <input type="time" id="endTime" name="endTime" value="00:00" required />
+        </div>
+        <h2 id="allowanceInfo">Allowance Information</h2>
+        <div id="allowanceInfoSelection">
+            <label for="lsaLevel">Please select your LSA level</label>
+            <select name="lsaLevel" id="lsaLevel">
+                <option value="0">Please Select you LSA level</option>
+                <option value="1">Level 1 (<280 Days) </option>
+                <option value="2">Level 2 (281 - 460 Days) </option>
+                <option value="3">Level 3 (281 - 460 Days) </option>
+                <option value="4">Level 4 (461 - 640 Days) </option>
+                <option value="5">Level 5 (641 - 820 Days) </option>
+                <option value="6">Level 6 (821 - 1000 Days) </option>
+                <option value="7">Level 7 (1001 - 1180 Days) </option>
+                <option value="8">Level 8 (1181 - 1360 Days) </option>
+                <option value="9">Level 9 (1361 - 1540 Days) </option>
+                <option value="10">Level 10 (1541 - 1720 Days) </option>
+                <option value="11">Level 11 (1721 - 1900 Days) </option>
+                <option value="12">Level 12 (1901 - 2080 Days) </option>
+                <option value="13">Level 13 (2081 - 2260 Days) </option>
+                <option value="14">Level 14 (2261 - 2800 Days) </option>
+                <option value="15">Level 15 (2801 - 3160 Days) </option>
+                <option value="16">Level 16 (3161+ Days) </option>
+            </select>
+            <h4>Your daily Rate is:</h4>
+            <div class="resultBox" id="dailyLsaRate"></div>
+            <div class="anymore1">
+                <p>Any other allowance?</p>
+                <label for="anymore1Yes">Yes</label>
+                <input type="radio" name="anymore1" value="yes" id="anymore1Yes">
+                <label for="anymore1No">No</label>
+                <input type="radio" name="anymore1" value="no" id="anymore1No" checked="checked">
+            </div>
+            <span class="allowanceLayer1">
+                <p>Allowance type?</p>
+                <div class="allowType">
+                    <input type="radio" name="allowance1Type" value="dailyrate" id="allowance1DailyRate"
+                        checked="checked">
+                    <label for="allowance1DailyRate">Daily Rate</label>
+                    <input type="radio" name="allowance1Type" value="lumpsum" id="allowance1Lumsum">
+                    <label for="allowance1Lumsum">Lump Sum</label>
+                </div>
+                <label for="allowance1">Please enter the rate:</label>
+                <input type="number" name="allowance1" id="allowance1" value="0.00" min="0" max="50" step="0.01">
+                <hr>
+                <div class="anymore2">
+                    <p>Any other allowance?</p>
+                    <label for="anymore2Yes">Yes</label>
+                    <input type="radio" name="anymore2" value="yes" id="anymore2Yes">
+                    <label for="anymore2No">No</label>
+                    <input type="radio" name="anymore2" value="no" id="anymore2No" checked="checked">
+                </div>
+            </span>
+            <span class="allowanceLayer2">
+                <p>Allowance type?</p>
+                <div class="allowType">
+                    <input type="radio" name="allowance2Type" value="dailyrate" id="allowance2DailyRate"
+                        checked="checked">
+                    <label for="allowance2DailyRate">Daily Rate</label>
+                    <input type="radio" name="allowance2Type" value="lumpsum" id="allowance2Lumsum">
+                    <label for="allowance2Lumsum">Lump Sum</label>
+                </div>
+                <label for="allowance2">Please enter the rate:</label>
+                <input type="number" name="allowance2" id="allowance2" value="0.00" min="0" max="50" step="0.01">
+                <hr>
+                <div class="anymore3">
+                    <p>Any other allowance?</p>
+                    <label for="anymore3Yes">Yes</label>
+                    <input type="radio" name="anymore3" value="yes" id="anymore3Yes">
+                    <label for="anymore3No">No</label>
+                    <input type="radio" name="anymore3" value="no" id="anymore3No" checked="checked">
+                </div>
+            </span>
+            <span class="allowanceLayer3">
+                <p>Allowance type?</p>
+                <div class="allowType">
+                    <input type="radio" name="allowance3Type" value="dailyrate" id="allowance3DailyRate"
+                        checked="checked">
+                    <label for="allowance3DailyRate">Daily Rate</label>
+                    <input type="radio" name="allowance3Type" value="lumpsum" id="allowance3Lumsum">
+                    <label for="allowance3Lumsum">Lump Sum</label>
+                </div>
+                <label for="allowance3">Please enter the rate:</label>
+                <input type="number" name="allowance3" id="allowance3" value="0.00" min="0" max="50" step="0.01">
+            </span>
+            <hr>
+        </div>
+        <div id="calculator">
+            <h2>Calculator</h2>
+            <div class="calc">
+                <div class="calcTitle">Simple Calculator</div>
+                <div class="method"></div>
+                <div class="calcResult"></div>
+                <div class="keys">
+                    <div class="key" id="key1">7</div>
+                    <div class="key" id="key2">8</div>
+                    <div class="key" id="key3">9</div>
+                    <div class="key" id="4">&#xf7</div>
+                    <div class="key" id="key5">&#177</div>
+                    <div class="key" id="key6">4</div>
+                    <div class="key" id="key7">5</div>
+                    <div class="key" id="key8">6</div>
+                    <div class="key" id="3">x</div>
+                    <div class="key" id="key10">%</div>
+                    <div class="key" id="key11">1</div>
+                    <div class="key" id="key12">2</div>
+                    <div class="key" id="key13">3</div>
+                    <div class="key" id="1">-</div>
+                    <div class="key" id="key15">Null</div>
+                    <div class="key" id="key16">0</div>
+                    <div class="key" id="key17">.</div>
+                    <div class="key" id="key18">AC</div>
+                    <div class="key" id="2">+</div>
+                    <div class="key" id="key20">=</div>
+                </div>
+            </div>
+        </div>
+        <div id="result">
+            <h2>Result</h2>
+            <div class="resultLiveRemaining">
+                <h3>Live completion status bar:</h3>
+                <div id="boxForFullRemaining">
+                    <div id="fullRemaining">
+                        <div class="liveRemaining" id="liveRemaining"></div>
+                    </div>
+                </div>
+            </div>
+            <h3>Live remaining timer:</h3>
+            <div class="liveResult">
+                <div class="resultSubSect">
+                    <h3>Remaining Days</h3>
+                    <div class="resultBox" id="liveDays"></div>
+                </div>
+                <div class="resultSubSect">
+                    <h3>Remaining Hours</h3>
+                    <div class="resultBox" id="liveHours"></div>
+                </div>
+                <div class="resultSubSect">
+                    <h3>Remaining Minutes</h3>
+                    <div class="resultBox" id="liveMinutes"></div>
+                </div>
+                <div class="resultSubSect">
+                    <h3>Remaining Seconds</h3>
+                    <div class="resultBox" id="liveSeconds"></div>
+                </div>
+            </div>
+            <div class="resultSection">
+                <div class="resultSubSect">
+                    <h3>Total Days</h3>
+                    <div class="resultBox" id="totalDays"></div>
+                </div>
+                <div class="resultSubSect">
+                    <h3>Remaining Days</h3>
+                    <div class="resultBox" id="remainingDays"></div>
+                </div>
+                <div class="resultSubSect">
+                    <h3>Completed Days</h3>
+                    <div class="resultBox" id="daysDone"></div>
+                </div>
+            </div>
+            <div class="resultSection">
+                <div class="resultSubSect">
+                    <h3>LSA earned <br> so far:</h3>
+                    <div class="resultBox" id="lsaEarned"></div>
+                </div>
+                <div class="resultSubSect">
+                    <h3>Total <br> LSA:</h3>
+                    <div class="resultBox" id="lsaTotal"></div>
+                </div>
+                <div class="resultSubSect">
+                    <h3>Total <br> Other:</h3>
+                    <div class="resultBox" id="otherEarned"></div>
+                </div>
+            </div>
+            <button id="reset">Reset All</button>
+        </div>
+    </div>
+
+    <script>
+        //For enabling Menu button to hide/appear .navLinkGroup: 
+        const navLinkGroup = document.querySelector('.navLinkGroup');
+        const navbarToggler = document.querySelector("#navbarToggler");
+        navbarToggler.addEventListener('click', () => {
+            if (navLinkGroup.style.display != "block") {
+                navLinkGroup.style.display = "block";
+            } else {
+                navLinkGroup.style.display = "none";
+            }
+        })
+        //Hiding navLink:
+        if (parseInt(getBrowserSize().width) < 910) {
+            navLinkGroup.style.display = "none";
+        }
+        //Getting width of the current window:
+        function getBrowserSize() {
+            let w;
+            if (typeof window.innerWidth != 'undefined') {
+                w = window.innerWidth; //other browsers
+            } else if (typeof document.documentElement != 'undefined' && typeof document.documentElement.clientWidth != 'undefined' && document.documentElement.clientWidth != 0) {
+                w = document.documentElement.clientWidth; //IE
+            } else {
+                w = document.body.clientWidth; //IE
+            }
+            return { 'width': w };
+        }
+
+        //Making hidden navLinkGroup visible when width > 871px: 
+        window.addEventListener('resize', () => {
+            if (parseInt(getBrowserSize().width) > 871) {
+                navLinkGroup.style.display = "";
+            }
+        });
+        window.addEventListener('resize', () => {
+            if (parseInt(getBrowserSize().width) < 910) {
+                navLinkGroup.style.display = "none";
+            }
+        });
+        //Defining LSA rate Object: 
+        const lsaRate = {
+            0: "",
+            1: "9.25",
+            2: "14.45",
+            3: "19.67",
+            4: "21.59",
+            5: "23.23",
+            6: "24.89",
+            7: "26.53",
+            8: "29.03",
+            9: "30.70",
+            10: "32.35",
+            11: "34.00",
+            12: "35.69",
+            13: "37.32",
+            14: "38.98",
+            15: "40.62",
+            16: "42.25"
+        }
+
+        //Displaying LSA rate according to selection in resultbox: 
+        let lsaSelectRate = 0;
+        const lsaSelect = document.querySelector('#lsaLevel');
+        //Function for displaying LSA rate:
+        const rateLsaToDisplay = () => {
+            lsaSelectRate = lsaRate[parseFloat(lsaSelect.value)];
+            document.querySelector('#dailyLsaRate').innerHTML = `£ ${lsaSelectRate}`;
+        }
+        lsaSelect.addEventListener('change', () => {
+            rateLsaToDisplay();
+            calcLSATotal();
+            calcLSASoFar();
+            localStorage.setItem("selectedLSA", lsaSelect.value);
+        })
+
+        //Any other allowance:
+        const allowanceLayer1 = document.querySelector('.allowanceLayer1');
+        const allowanceLayer2 = document.querySelector('.allowanceLayer2');
+        const allowanceLayer3 = document.querySelector('.allowanceLayer3');
+        const anymore1 = document.querySelectorAll('input[name="anymore1"]');
+        const anymore2 = document.querySelectorAll('input[name="anymore2"]');
+        const anymore3 = document.querySelectorAll('input[name="anymore3"]');
+        const anymore1Yes = document.querySelector('#anymore1Yes');
+        const anymore1No = document.querySelector('#anymore1No');
+        const anymore2Yes = document.querySelector('#anymore2Yes');
+        const anymore2No = document.querySelector('#anymore2No');
+        const anymore3Yes = document.querySelector('#anymore3Yes');
+        const anymore3No = document.querySelector('#anymore3No');
+        const anyMore1 = document.querySelector('.anymore1');
+        const anyMore2 = document.querySelector('.anymore2');
+        const anyMore3 = document.querySelector('.anymore3');
+        const allowance1 = document.querySelector('#allowance1');
+        const allowance2 = document.querySelector('#allowance2');
+        const allowance3 = document.querySelector('#allowance3');
+
+        //Hiding all Anyother allowances:
+        allowanceLayer1.style.display = 'none';
+        allowanceLayer2.style.display = 'none';
+        allowanceLayer3.style.display = 'none';
+
+        //For first other allowance:
+        anyMore1.addEventListener('click', () => {
+            for (const radioBtn of anymore1) {
+                if (radioBtn.checked) {
+                    if (radioBtn.value === "no") {
+                        allowanceLayer1.style.display = 'none';
+                        allowanceLayer2.style.display = 'none';
+                        allowanceLayer3.style.display = 'none';
+                        anymore2No.checked = true; //reseting #anymore2 to 'no'.
+                        anymore3No.checked = true; //reseting #anymore3 to 'no'.
+                        allowance1.value = 0;
+                        localStorage.setItem('setAllowance1', allowance1.value);
+                        allowance2.value = 0;
+                        localStorage.setItem('setAllowance2', allowance2.value);
+                        allowance3.value = 0;
+                        localStorage.setItem('setAllowance3', allowance3.value);
+                        localStorage.setItem('setAnymore1Yes', anymore1Yes.checked);
+                        localStorage.setItem('setAnymore1No', anymore1No.checked);
+                        localStorage.setItem('setAnymore2Yes', anymore2Yes.checked);
+                        localStorage.setItem('setAnymore2No', anymore2No.checked);
+                        localStorage.setItem('setAnymore3Yes', anymore3Yes.checked);
+                        localStorage.setItem('setAnymore3No', anymore3No.checked);
+                        calcOtherAllowance();
+                    } else if (radioBtn.value === "yes") {
+                        allowanceLayer1.style.display = '';
+                        localStorage.setItem('setAnymore1Yes', anymore1Yes.checked);
+                        localStorage.setItem('setAnymore1No', anymore1No.checked);
+                        localStorage.setItem('setAnymore2Yes', anymore2Yes.checked);
+                        localStorage.setItem('setAnymore2No', anymore2No.checked);
+                        localStorage.setItem('setAnymore3Yes', anymore3Yes.checked);
+                        localStorage.setItem('setAnymore3No', anymore3No.checked);
+                    }
+                }
+            }
+        })
+
+        //For second other allowance:
+        anyMore2.addEventListener('click', () => {
+            for (const radioBtn of anymore2) {
+                if (radioBtn.checked) {
+                    if (radioBtn.value === "no") {
+                        allowanceLayer2.style.display = 'none';
+                        allowanceLayer3.style.display = 'none';
+                        anymore3No.checked = true; //reseting #anymore3 to 'no'.
+                        allowance2.value = 0;
+                        localStorage.setItem('setAllowance2', allowance2.value);
+                        allowance3.value = 0;
+                        localStorage.setItem('setAllowance3', allowance3.value);
+                        localStorage.setItem('setAnymore2Yes', anymore2Yes.checked);
+                        localStorage.setItem('setAnymore2No', anymore2No.checked);
+                        localStorage.setItem('setAnymore3Yes', anymore3Yes.checked);
+                        localStorage.setItem('setAnymore3No', anymore3No.checked);
+                        calcOtherAllowance();
+                    } else if (radioBtn.value === "yes") {
+                        allowanceLayer2.style.display = '';
+                        localStorage.setItem('setAnymore2Yes', anymore2Yes.checked);
+                        localStorage.setItem('setAnymore2No', anymore2No.checked);
+                        localStorage.setItem('setAnymore3Yes', anymore3Yes.checked);
+                        localStorage.setItem('setAnymore3No', anymore3No.checked);
+                    }
+                }
+            }
+        })
+
+        //For third other allowance:
+        anyMore3.addEventListener('click', () => {
+            for (const radioBtn of anymore3) {
+                if (radioBtn.checked) {
+                    if (radioBtn.value === "no") {
+                        allowanceLayer3.style.display = 'none';
+                        allowance3.value = 0;
+                        localStorage.setItem("setAllowance3", allowance3.value);
+                        localStorage.setItem('setAnymore3Yes', anymore3Yes.checked);
+                        localStorage.setItem('setAnymore3No', anymore3No.checked);
+                        calcOtherAllowance();
+                    } else if (radioBtn.value === "yes") {
+                        allowanceLayer3.style.display = '';
+                        localStorage.setItem('setAnymore3Yes', anymore3Yes.checked);
+                        localStorage.setItem('setAnymore3No', anymore3No.checked);
+                    }
+                }
+            }
+        })
+
+
+        //Calculator Script start: ------------------------
+        const keys = document.querySelector('.keys');
+        const method = document.querySelector('.method');
+        const calcResult = document.querySelector('.calcResult');
+        const calc = document.querySelector('.calc');
+
+        let tempSingleValue = '';
+        let interlockSymbolKeys = 0;
+        tempSymbolStore = []; //c is changed to tempSymbolStore
+        d = []; //d is to be changed to tempDataStore
+        let symbolPressed = true;
+        let equalPressed = false;
+        resulted = '';
+        preventKey5 = false;
+        keys.addEventListener('click', (e) => {
+            const clicked = e.target;
+            if (clicked.className != "keys") {
+                if (clicked.id == "key5") {
+                    //key(+/-):
+                    if (tempSingleValue == "" && method.innerText[method.innerText.length - 1] != ')') {
+                        tempSingleValue = "-";
+                        method.innerHTML += tempSingleValue;
+                    } else if (tempSingleValue == "-" && method.innerText[method.innerText.length - 1] != ')') {
+                        tempSingleValue = "";
+                        method.innerHTML = method.innerText.replace(/.$/, '');
+                    }
+                } else if (clicked.id == "1" || clicked.id == "2" || clicked.id == "3" || clicked.id == "4") {
+                    //operator keys(+ - x /)
+                    if (symbolPressed == false) {
+                        tempSymbolStore.push(clicked.id);
+                        if (tempSymbolStore.length > 2) {
+                            tempSymbolStore.shift();
+                        };
+                        if (interlockSymbolKeys < 1) {
+                            method.innerHTML += clicked.innerText;
+                        };
+                        interlockSymbolKeys++;
+                        if (equalPressed == false) { //Executing calculation with the operator keys (+ - x /):
+                            d.push(tempSingleValue);
+                            if (interlockSymbolKeys > 1) {
+                                interlockSymbolKeys = 1;
+                                work(d[0], d[1]);
+                                method.innerHTML += clicked.innerText;
+                            };
+                        };
+                        symbolPressed = true;
+                        equalPressed = false;
+                        preventKey5 = false;
+                        tempSingleValue = '';
+                    } else if (calcResult.innerHTML !== "Error" && (tempSingleValue != '' || d.length > 0) && method.innerText !== '-') {
+                        method.innerHTML = method.innerHTML.slice(0, method.innerHTML.length - 1) + clicked.innerText;
+                        tempSymbolStore.pop();
+                        tempSymbolStore.push(clicked.id);
+                    };
+                } else if (clicked.id == "key18") {
+                    //Clear C key:
+                    method.innerHTML = '';
+                    calcResult.innerHTML = '';
+                    tempSingleValue = '';
+                    d = [];
+                    tempSymbolStore = [];
+                    e = 0;
+                    interlockSymbolKeys = 0;
+                    resulted = '';
+                    symbolPressed = true;
+                    equalPressed = false;
+                    preventKey5 = false;
+
+                } else if (clicked.id == "key10") {
+                    //percentage key:
+                    if (symbolPressed == false && equalPressed === false && tempSymbolStore.includes('4')) {
+                        interlockSymbolKeys = 0;
+                        equalPressed = true;
+                        if (tempSymbolStore.length > 1) {
+                            tempSymbolStore.shift();
+                            tempSymbolStore.push(tempSymbolStore[0]);
+                        };
+                        d.push(tempSingleValue);
+                        work(d[0], d[1]);
+                        calcResult.innerHTML = `${(parseFloat(calcResult.innerText) * 100).toString().slice(0, 5)}%`; //reducing length by converting number to string and then using slice function.
+                        method.innerHTML = `(${method.innerText} x 100)`;
+                        tempSingleValue = '';
+                    }
+                } else if (clicked.id == "key20") {
+                    //Equal = key:
+                    if (symbolPressed == false && equalPressed === false && d.length > 0 && tempSingleValue != '') {
+                        interlockSymbolKeys = 0;
+                        equalPressed = true;
+                        if (tempSymbolStore.length > 1) {
+                            tempSymbolStore.shift();
+                            tempSymbolStore.push(tempSymbolStore[0]);
+                        };
+                        d.push(tempSingleValue);
+                        work(d[0], d[1]);
+                        tempSingleValue = '';
+                    } else {
+                        if (typeof parseFloat(method.innerText) == 'number' && d.length == 0) {
+                            calcResult.innerHTML = method.innerText;
+                        }
+                    }
+                } else if (clicked.id == "key17") {
+                    if (symbolPressed == false && tempSingleValue.includes('.') == false && method.innerText[method.innerText.length - 1] != ')') {
+                        tempSingleValue += clicked.innerText;
+                        method.innerHTML += clicked.innerText;
+                    }
+                } else {
+                    if (equalPressed === false && interlockSymbolKeys < 2 && calcResult.innerHTML != "Error") {
+                        symbolPressed = false;
+                        tempSingleValue += clicked.innerText;
+                        if (resulted === '') {
+                            method.innerHTML += clicked.innerText;
+                        } else if (tempSymbolStore.length > 1) {
+                            method.innerHTML = resulted + document.querySelector(`[id='${tempSymbolStore[1]}']`).innerText + tempSingleValue;
+                            equalPressed = false;
+                        } else {
+                            method.innerHTML = resulted + document.querySelector(`[id='${tempSymbolStore[0]}']`).innerText + tempSingleValue;
+                        }
+                    }
+                }
+            }
+        });
+        //Operator function for calculator:
+        const work = (a, b) => {
+            operatorValue = parseInt(tempSymbolStore[0]);
+            switch (operatorValue) {
+                case 1:
+                    resulted = parseFloat(a) - parseFloat(b);
+                    break;
+                case 2:
+                    resulted = parseFloat(a) + parseFloat(b);
+                    break;
+                case 3:
+                    resulted = parseFloat(a) * parseFloat(b);
+                    break;
+                case 4:
+                    resulted = parseFloat(a) / parseFloat(b);
+                    break;
+                default:
+                    resulted = "Error";
+                    break;
+            };
+            calcResult.innerHTML = `${(resulted).toString().slice(0, 15)}`;
+            method.innerHTML = `(${method.innerText})`;
+            d = [];
+            d.push(resulted);
+        };
+        //Calculator Script end. ------------------------
+
+        //Result -> Total and remaining days:
+        let startDateDays = '';
+        let endDateDays = '';
+        let daysRemaining = '';
+        let daysDone = '';
+        let daysTotal = '';
+        //Date calculation:
+        const startDate = document.querySelector('#start');
+        const startTime = document.querySelector('#startTime');
+        const endDate = document.querySelector('#end');
+        const endTime = document.querySelector('#endTime');
+        const liveRemaining = document.querySelector('#liveRemaining');
+
+        //function of calc days between start and end date:
+        const getDaysNumber = () => {
+            if (typeof (startDateDays) == 'object' && typeof (endDateDays) == 'object' && startDateDays < endDateDays) {
+                daysTotal = (endDateDays - startDateDays) / (1000 * 60 * 60 * 24);
+                document.querySelector('#totalDays').innerHTML = Math.ceil(daysTotal);
+            } else {
+                document.querySelector('#totalDays').innerHTML = '';
+            }
+        }
+        //function for getting remaining days:
+        const getDaysRemaining = () => {
+            if (typeof (startDateDays) == 'object' && typeof (endDateDays) == 'object' && startDateDays < endDateDays) {
+                if (startDateDays < new Date()) {
+                    daysRemaining = (endDateDays - new Date()) / (1000 * 60 * 60 * 24);
+                    if (daysRemaining < 0) {
+                        document.querySelector('#remainingDays').innerHTML = 0;
+                    } else {
+                        document.querySelector('#remainingDays').innerHTML = Math.floor(daysRemaining);
+                    }
+                } else {
+                    daysRemaining = (endDateDays - startDateDays) / (1000 * 60 * 60 * 24);
+                    if (daysRemaining < 0) {
+                        document.querySelector('#remainingDays').innerHTML = 0;
+                    } else {
+                        document.querySelector('#remainingDays').innerHTML = Math.floor(daysRemaining);
+                    }
+                }
+
+            } else {
+                document.querySelector('#remainingDays').innerHTML = '';
+            }
+        }
+        //function for getting done days:
+        const getDaysDone = () => {
+            if (typeof (startDateDays) == 'object' && typeof (endDateDays) == 'object' && startDateDays < endDateDays) {
+                if (endDateDays > (new Date()) && startDateDays < new Date()) {
+                    daysDone = (new Date() - startDateDays) / (1000 * 60 * 60 * 24);
+                    if (daysDone < 0) {
+                        document.querySelector('#daysDone').innerHTML = 0;
+                    } else {
+                        document.querySelector('#daysDone').innerHTML = Math.ceil(daysDone);
+                    }
+                } else if (endDateDays < (new Date()) && startDateDays < new Date()) {
+                    daysDone = (endDateDays - startDateDays) / (1000 * 60 * 60 * 24);
+                    document.querySelector('#daysDone').innerHTML = Math.ceil(daysDone);
+                } else {
+                    daysDone = 0;
+                    document.querySelector('#daysDone').innerHTML = Math.ceil(daysDone);
+                }
+            } else {
+                document.querySelector('#daysDone').innerHTML = '';
+            }
+        }
+        //Function for setting input time:
+        const setStartTime = () => {
+            if (typeof (startDateDays) == 'object' && typeof (endDateDays) == 'object') {
+                startDateDays.setHours((parseInt(startTime.value.slice(0, 2))), (parseInt(startTime.value.slice(3, 5))));
+            }
+        }
+        const setEndTime = () => {
+            if (typeof (startDateDays) == 'object' && typeof (endDateDays) == 'object') {
+                endDateDays.setHours((parseInt(endTime.value.slice(0, 2))), (parseInt(endTime.value.slice(3, 5))));
+            }
+        }
+        //Function for getting completed percentage:
+        const donePercentage = () => {
+            if (startDateDays != '' && endDateDays != '' && startDateDays < endDateDays) {
+                liveRemaining.style.display = 'block';
+                document.querySelector('#fullRemaining').style.backgroundColor = '';
+                let donePercent = (((new Date()) - startDateDays) / (endDateDays - startDateDays)) * 100;
+                if (donePercent > 100) {
+                    liveRemaining.innerHTML = '100% Done';
+                    liveRemaining.style.width = '100%';
+                    liveRemaining.style.borderRadius = "0.3em";
+                } else if (donePercent < 0) {
+                    liveRemaining.innerHTML = '0% Done';
+                    liveRemaining.style.width = '0%';
+                } else {
+                    liveRemaining.innerHTML = `${donePercent.toFixed(2)}% Done`;
+                    liveRemaining.style.width = donePercent.toFixed(0) + "%";
+                }
+            } else if (startDateDays != '' && endDateDays != '') {
+                liveRemaining.innerText = 'Error! The set start date is after the end date!';
+                document.querySelector('#fullRemaining').style.backgroundColor = 'rgb(255, 91, 91)';
+                liveRemaining.style.width = '0%';
+            }
+        }
+        //Function for getting live remaining:
+        const getLiveStatusDetails = () => {
+            //querySelector:
+            const liveDays = document.querySelector('#liveDays');
+            const liveHours = document.querySelector('#liveHours');
+            const liveMinutes = document.querySelector('#liveMinutes');
+            const liveSeconds = document.querySelector('#liveSeconds');
+            let refreshingCurrentDate = new Date();
+            if (typeof (startDateDays) == 'object' && typeof (endDateDays) == 'object' && startDateDays < endDateDays) {
+                let calcLiveDaysRaw = 0;
+                let calcLiveDays = 0;
+                if (startDateDays < refreshingCurrentDate && endDateDays > refreshingCurrentDate) {
+                    //Live days:
+                    calcLiveDaysRaw = ((endDateDays - refreshingCurrentDate) / (1000 * 60 * 60 * 24));
+                    calcLiveDays = Math.floor((endDateDays - refreshingCurrentDate) / (1000 * 60 * 60 * 24));
+                } else if (endDateDays > refreshingCurrentDate) {
+                    //Live days:
+                    calcLiveDaysRaw = ((endDateDays - startDateDays) / (1000 * 60 * 60 * 24));
+                    calcLiveDays = Math.floor((endDateDays - startDateDays) / (1000 * 60 * 60 * 24));
+                } else {
+                    calcLiveDaysRaw = 0;
+                    calcLiveDays = 0;
+                }
+                //Live houes:
+                let calcLiveHoursRaw = ((calcLiveDaysRaw - calcLiveDays) * 24);
+                let calcLiveHours = Math.floor((calcLiveDaysRaw - calcLiveDays) * 24);
+                //Live minutes:
+                let calcLiveMinRaw = ((calcLiveHoursRaw - calcLiveHours) * 60);
+                let calcLiveMin = Math.floor((calcLiveHoursRaw - calcLiveHours) * 60);
+                //Live Seconds: 
+                let calcLiveSecRaw = ((calcLiveMinRaw - calcLiveMin) * 60);
+                let calcLiveSec = Math.floor((calcLiveMinRaw - calcLiveMin) * 60);
+                //Displaying to result box:
+                liveResults = [liveDays, liveHours, liveMinutes, liveSeconds];
+                calcLiveResults = [calcLiveDays, calcLiveHours, calcLiveMin, calcLiveSec];
+                for (let i = 0; i <= calcLiveResults.length - 1; i++) {
+                    let testValue = calcLiveResults[i];
+                    if (testValue >= 1) {
+                        liveResults[i].innerHTML = calcLiveResults[i];
+                    } else {
+                        liveResults[i].innerHTML = 0;
+                    }
+                }
+            } else if (startDateDays != '' && endDateDays != '') {
+                liveDays.innerText = '';
+                liveHours.innerText = '';
+                liveMinutes.innerText = '';
+                liveSeconds.innerText = '';
+            }
+        }
+        //Setting interval for live updating results:
+        var myIntervalA;
+        var myIntervalB;
+        //Function package with interval functions:
+        const callFunctionPackage = () => {
+            donePercentage(); //for installing calling the function as the interval is set to after every 1 hour.
+            getDaysNumber();
+            getDaysRemaining();
+            calcLSATotal();
+            getDaysDone();
+            calcLSASoFar();
+            calcOtherAllowance();
+            myIntervalA = setInterval(getLiveStatusDetails, 1000);
+            myIntervalB = setInterval(donePercentage, 3600000);
+        }
+
+        //EventListerners: 
+        startDate.addEventListener('input', (e) => {
+            startDateDays = new Date(startDate.value);
+            setStartTime();
+            callFunctionPackage();
+            localStorage.setItem("selectedStart", startDate.value);
+        })
+        endDate.addEventListener('input', (e) => {
+            endDateDays = new Date(endDate.value);
+            setEndTime();
+            callFunctionPackage();
+            localStorage.setItem("selectedEnd", endDate.value);
+        })
+        startTime.addEventListener('change', () => {
+            setStartTime();
+            callFunctionPackage();
+            localStorage.setItem("selectedST", startTime.value);
+        })
+        endTime.addEventListener('change', () => {
+            setEndTime();
+            callFunctionPackage();
+            localStorage.setItem("selectedET", endTime.value);
+        })
+
+        //Getting total LSA:
+        const lsaEarned = document.querySelector('#lsaEarned');
+        const lsaTotal = document.querySelector('#lsaTotal');
+        const calcLSATotal = () => {
+            if (typeof (startDateDays) == 'object' && typeof (endDateDays) == 'object' && startDateDays < endDateDays) {
+                let totalLsa = lsaSelectRate * Math.ceil(daysTotal);
+                lsaTotal.innerHTML = `£ ${(totalLsa).toFixed(2)}`;
+            } else {
+                lsaTotal.innerHTML = '';
+            }
+        }
+        //Getting earned LSA so far:
+        const calcLSASoFar = () => {
+            if (typeof (startDateDays) == 'object' && typeof (endDateDays) == 'object' && startDateDays < endDateDays) {
+                let earnedLsa = lsaSelectRate * Math.ceil(daysDone);
+                lsaEarned.innerHTML = `£ ${(earnedLsa).toFixed(2)}`
+            } else {
+                lsaEarned.innerHTML = '';
+            }
+        }
+        //Calculation other allowances in total:
+        const allowSum1Types = document.querySelectorAll('input[name="allowance1Type"]');
+        const allowSum2Types = document.querySelectorAll('input[name="allowance2Type"]');
+        const allowSum3Types = document.querySelectorAll('input[name="allowance3Type"]');
+        const otherEarned = document.querySelector('#otherEarned');
+        //calcOtherAllowance function:
+        let totalOtherAllow = 0;
+        const calcOtherAllowance = () => {
+            if (startDateDays < endDateDays) {
+                for (let allowSum1Type of allowSum1Types) {
+                    if (allowSum1Type.checked) {
+                        if (allowSum1Type.value === "dailyrate") {
+                            totalOtherAllow = (parseFloat(allowance1.value) * Math.ceil(daysTotal));
+                            localStorage.setItem('setAllow1Lumpsum', allowance1Lumsum.checked);
+                            localStorage.setItem('setAllow1DailyRate', allowance1DailyRate.checked);
+                        } else {
+                            totalOtherAllow = parseFloat(allowance1.value);
+                            localStorage.setItem('setAllow1Lumpsum', allowance1Lumsum.checked);
+                            localStorage.setItem('setAllow1DailyRate', allowance1DailyRate.checked);
+                        };
+                    }
+                };
+                for (let allowSum2Type of allowSum2Types) {
+                    if (allowSum2Type.checked) {
+                        if (allowSum2Type.value === "dailyrate") {
+                            totalOtherAllow += (parseFloat(allowance2.value) * Math.ceil(daysTotal));
+                            localStorage.setItem('setAllow2Lumpsum', allowance2Lumsum.checked);
+                            localStorage.setItem('setAllow2DailyRate', allowance2DailyRate.checked);
+                        } else {
+                            totalOtherAllow += parseFloat(allowance2.value);
+                            localStorage.setItem('setAllow2Lumpsum', allowance2Lumsum.checked);
+                            localStorage.setItem('setAllow2DailyRate', allowance2DailyRate.checked);
+                        };
+                    }
+                }
+                for (let allowSum3Type of allowSum3Types) {
+                    if (allowSum3Type.checked) {
+                        if (allowSum3Type.value === "dailyrate") {
+                            totalOtherAllow += (parseFloat(allowance3.value) * Math.ceil(daysTotal));
+                            localStorage.setItem('setAllow3Lumpsum', allowance3Lumsum.checked);
+                            localStorage.setItem('setAllow3DailyRate', allowance3DailyRate.checked);
+                        } else {
+                            totalOtherAllow += parseFloat(allowance3.value);
+                            localStorage.setItem('setAllow3Lumpsum', allowance3Lumsum.checked);
+                            localStorage.setItem('setAllow3DailyRate', allowance3DailyRate.checked);
+                        };
+                    }
+                }
+                otherEarned.innerHTML = `£ ${totalOtherAllow.toFixed(2)}`;
+            } else {
+                otherEarned.innerHTML = '';
+            }
+        }
+        //Calling calcOtherAllowance with clicking of specific buttons:
+        const allowance1Lumsum = document.querySelector('#allowance1Lumsum');
+        const allowance1DailyRate = document.querySelector('#allowance1DailyRate');
+        const allowance2Lumsum = document.querySelector('#allowance2Lumsum');
+        const allowance2DailyRate = document.querySelector('#allowance2DailyRate');
+        const allowance3Lumsum = document.querySelector('#allowance3Lumsum');
+        const allowance3DailyRate = document.querySelector('#allowance3DailyRate');
+
+        allowance1.addEventListener('change', () => {
+            calcOtherAllowance();
+            localStorage.setItem("setAllowance1", allowance1.value);
+        })
+        allowance2.addEventListener('change', () => {
+            calcOtherAllowance();
+            localStorage.setItem("setAllowance2", allowance2.value);
+        })
+        allowance3.addEventListener('change', () => {
+            calcOtherAllowance();
+            localStorage.setItem("setAllowance3", allowance3.value);
+        })
+        allowance1Lumsum.addEventListener('click', () => {
+            calcOtherAllowance();
+        })
+        allowance1DailyRate.addEventListener('click', () => {
+            calcOtherAllowance();
+        })
+        allowance2Lumsum.addEventListener('click', () => {
+            calcOtherAllowance();
+        })
+        allowance2DailyRate.addEventListener('click', () => {
+            calcOtherAllowance();
+        })
+        allowance3Lumsum.addEventListener('click', () => {
+            calcOtherAllowance();
+        })
+        allowance3DailyRate.addEventListener('click', () => {
+            calcOtherAllowance();
+        })
+
+        //Function for retriving saved values from local storage:-----------------------------------
+        const retrivingSaved = () => {
+            //For date and time:
+            if (localStorage.getItem('selectedStart') != null) {
+                startDate.value = localStorage.getItem('selectedStart');
+            };
+            if (localStorage.getItem('selectedEnd') != null) {
+                endDate.value = localStorage.getItem('selectedEnd');
+            };
+            if (localStorage.getItem('selectedST') != null) {
+                startTime.value = localStorage.getItem('selectedST');
+            };
+            if (localStorage.getItem('selectedET') != null) {
+                endTime.value = localStorage.getItem('selectedET');
+            };
+            //For LSA:
+            if (localStorage.getItem('selectedLSA') != null) {
+                lsaSelect.value = localStorage.getItem('selectedLSA');
+            };
+            //for Other Allowance 1:
+            anymore1Yes.checked = (localStorage.getItem('setAnymore1Yes') == 'true');
+            anymore1No.checked = (localStorage.getItem('setAnymore1No') == 'true');
+            allowance1DailyRate.checked = (localStorage.getItem('setAllow1DailyRate') == 'true');
+            allowance1Lumsum.checked = (localStorage.getItem('setAllow1Lumpsum') == 'true');
+            if (localStorage.getItem('setAllowance1') != null) {
+                allowance1.value = localStorage.getItem('setAllowance1');
+            };
+            //for Other Allowance 2:
+            anymore2Yes.checked = (localStorage.getItem('setAnymore2Yes') == 'true');
+            anymore2No.checked = (localStorage.getItem('setAnymore2No') == 'true');
+            allowance2DailyRate.checked = (localStorage.getItem('setAllow2DailyRate') == 'true');
+            allowance2Lumsum.checked = (localStorage.getItem('setAllow2Lumpsum') == 'true');
+            if (localStorage.getItem('setAllowance2') != null) {
+                allowance2.value = localStorage.getItem('setAllowance2');
+            };
+            //for Other Allowance 3:
+            anymore3Yes.checked = (localStorage.getItem('setAnymore3Yes') == 'true');
+            anymore3No.checked = (localStorage.getItem('setAnymore3No') == 'true');
+            allowance3DailyRate.checked = (localStorage.getItem('setAllow3DailyRate') == 'true');
+            allowance3Lumsum.checked = (localStorage.getItem('setAllow3Lumpsum') == 'true');
+            if (localStorage.getItem('setAllowance3') != null) {
+                allowance3.value = localStorage.getItem('setAllowance3')
+            };
+            //Now executing functions for the retrived data:------
+            startDateDays = new Date(startDate.value);
+            endDateDays = new Date(endDate.value);
+            setStartTime();
+            setEndTime();
+            rateLsaToDisplay();
+            callFunctionPackage();
+            //For changing the display visibility according to the checked Yes/No:
+            anyMoreStatus = [anymore1Yes.checked, anymore2Yes.checked, anymore3Yes.checked]
+            currentDisplay = [allowanceLayer1, allowanceLayer2, allowanceLayer3];
+            for (let i = 0; i < anyMoreStatus.length; i++) {
+                currentStatus = anyMoreStatus[i];
+                if (currentStatus === true) {
+                    currentDisplay[i].style.display = 'block';
+                } else {
+                    currentDisplay[i].style.display = 'none';
+                }
+            }
+        }
+        //Reser (clear all input from local storage)
+        const reset = document.querySelector('#reset');
+        reset.addEventListener('click', () => {
+            console.log('reset')
+            let resetDecision = confirm('Are you sure you want to reset all the data?');
+            if (resetDecision) {
+                localStorage.clear();
+                alert('All data successfully reset!');
+                location.reload();
+            } else {
+                alert('Action cancelled')
+            }
+        })
+        //Finally :)
+        //For running retrivingSaved() function after 2 seconds:
+        if (localStorage.getItem('selectedStart') != null && localStorage.getItem('selectedEnd') != null /*&& localStorage.getItem('selectedLSA') != null*/) {
+            setTimeout(retrivingSaved, 2000);
+        }
+
+    </script>
+    <footer>
+        <p>Created by Ram Kaji Thapa for jHUB idea. </p>
+        <p>Copyright © ThapaIdea. All Rights Reserved</p>
+        <img src="https://images.unsplash.com/photo-1529485726363-95c8d62f656f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+            onerror="this.src='logo.jpg';" />
+    </footer>
+</body>
+
+</html>
+
